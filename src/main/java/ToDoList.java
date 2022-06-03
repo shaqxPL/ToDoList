@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ToDoList {
 
@@ -12,14 +13,14 @@ public class ToDoList {
         taskList = new ArrayList<>();
     }
 
-/**
- * Adding a Task object in ArrayList
- * @param title A String that holds the title of a task and it cannot be empty or null.
- * @param project A String that holds the name of project associated with task, and it could be an empty string.
- * @param dueDate The due date of the task as yyyy-mm-dd format
- */
+    /**
+     * Adding a Task object in ArrayList
+     * @param title A String that holds the title of a task and it cannot be empty or null.
+     * @param project A String that holds the name of project associated with task, and it could be an empty string.
+     * @param dueDate The due date of the task as yyyy-mm-dd format
+     */
     public void addTask(String title, String project, LocalDate dueDate) {
-
+        this.taskList.add(new Task(title,project,dueDate));
     }
     /**
      * A method to read the value from user (standard input, i.e., terminal)
@@ -27,7 +28,29 @@ public class ToDoList {
      * @return true, if the Tasks object is created and added to ArrayList, otherwise false
      */
     public boolean readTaskFromUser(){
-        return false;
+        Scanner scan = new Scanner(System.in);
+
+        try {
+            System.out.println("Please enter the following details to add a task: ");
+            System.out.println(">>> Task Title   :  ");
+            String title = scan.nextLine();
+
+            System.out.println(">>> Project Name :  ");
+            String project = scan.nextLine();
+
+            System.out.println(">>> Due Date [example: 2022-06-25] :  ");
+            LocalDate dueDate = LocalDate.parse(scan.nextLine());
+
+            this.taskList.add(new Task(title,project,dueDate));
+
+            //TODO: Dodać wywołanie metody showmessage() o dodaniu taska
+            System.out.println("DODANO TASK!");
+            return true;
+        }
+        catch (Exception e) {
+            //TODO Dodać wywołanie metody showmessage() o niedodaniu taska
+            return false;
+        }
     }
 
     /**
@@ -60,7 +83,3 @@ public class ToDoList {
 
 
 }
-
-
-
-
